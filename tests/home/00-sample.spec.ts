@@ -6,8 +6,8 @@ test.describe('Sample suite verification', () => {
   }, async ({ homePage }) => {
     await test.step('Open homepage, verify site title and site description is correct', async () => {
       await homePage.goto();
-      await expect(homePage.siteTitle).toHaveText('E-commerce site testing');
-      await expect(homePage.siteDescription).toContainText('Website thực hành – hoctest.com');
+      await expect(homePage.homePageLocs.title("E-commerce site testing")).toBeVisible();
+      await expect(homePage.homePageLocs.description('Website thực hành – hoctest.com')).toBeVisible();
     });
   });
 });
