@@ -106,6 +106,7 @@ Dự án được tổ chức theo cấu trúc chuẩn như sau:
 
 ## 🌿 Git Convention
 
+### 1. Quy tắc đặt tên Branch
 Trước khi đẩy code, vui lòng đặt tên nhánh (branch) theo định dạng:
 
 ```text
@@ -115,6 +116,17 @@ QA-{ten-ban}-{challenge-number}
 *Ví dụ:*
 - `QA-alex-challenge-1`
 - `QA-hoang-challenge-2`
+
+### 2. Quy tắc viết Commit Message
+Sử dụng các tiền tố chuẩn sau cho commit message:
+- **`feat:`** Thêm test case mới hoặc viết thêm tính năng.
+- **`fix:`** Sửa lỗi, cập nhật locator, sửa logic test.
+- **`chore:`** Cập nhật tài liệu (README, docs), file cấu hình hoặc dọn dẹp code.
+
+*Ví dụ:*
+- `feat: add sample verification test`
+- `fix: refactor locator of homepage`
+- `chore: update readme with git convention`
 
 ---
 
