@@ -13,8 +13,8 @@
       "@components/*": ["src/components/*"],
       "@config/*": ["src/config/*"],
       "@data/*": ["src/data/*"],
+      "@fixtures": ["src/fixtures/index.ts"],
       "@fixtures/*": ["src/fixtures/*"],
-      "@fixture/*": ["src/fixtures/*"],
       "@pages/*": ["src/pages/*"]
     }
   },
