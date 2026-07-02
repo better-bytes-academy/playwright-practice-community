@@ -3,10 +3,14 @@ import { BasePage } from '@pages/base.page';
 
 export class HomePage extends BasePage {
   readonly siteDescription: Locator;
+  readonly searchInput: Locator;
+  readonly searchButton: Locator;
 
   constructor(page: Page) {
     super(page);
     this.siteDescription = page.locator('p.site-description');
+    this.searchInput = page.getByRole('textbox', { name: 'Search products...' });
+    this.searchButton = page.locator('button.header-search-button');
   }
 
   get homePageLocs() {
@@ -18,5 +22,10 @@ export class HomePage extends BasePage {
 
   async goto(): Promise<void> {
     await this.navigate('/');
+  }
+
+  async searchProduct(keyword: string): Promise<void> {
+    await this.searchInput.fill(keyword);
+    await this.searchButton.click();
   }
 }
