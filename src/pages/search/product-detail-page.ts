@@ -11,19 +11,22 @@ export class ProductDetailPage extends BasePage {
     }
 
     async verifyContentContainsKeyword(keyword: string): Promise<void> {
-        const titleText = (await this.productTitle.innerText()).toLowerCase();
-        let descriptionText = '';
+        const lowerKeyword = keyword.toLocaleLowerCase();
 
-        if (await this.productDescription.isVisible()) {
-            descriptionText = (await this.productDescription.innerText()).toLowerCase();
-        }
+        await expect.poll(async () => {
+            const titleText = (await this.productTitle.innerText()).toLowerCase();
+            let descriptionText = '';
 
-        const lowerKeyord = keyword.toLocaleLowerCase();
+            if (await this.productDescription.isVisible()) {
+                descriptionText = (await this.productDescription.innerText()).toLowerCase();
+            }
 
-        const isTitleContains = titleText.includes(lowerKeyord);
-        const isDescriptionContains = descriptionText.includes(lowerKeyord);
+            return titleText.includes(lowerKeyword) || descriptionText.includes(lowerKeyword);
+        }, {
+            message: `Expected product title or description to contain "${keyword}"`,
+            timeout: 5000,
+        }).toBe(true);
 
-        expect(isTitleContains || isDescriptionContains).toBe(true);
     }
 
     async goBack(): Promise<void> {

@@ -9,8 +9,7 @@ export class SearchResultPage extends BasePage {
     }
 
     async verifyUrlParams(expectedParam: string): Promise<void> {
-        const currentUrl = this.page.url();
-        expect(currentUrl).toContain(expectedParam);
+        await expect.poll(() => this.page.url()).toContain(expectedParam);
     }
 
     async verifyProductCount(expectedCount: number): Promise<void> {
