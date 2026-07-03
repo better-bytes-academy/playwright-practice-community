@@ -9,7 +9,7 @@ export class HomePage extends BasePage {
   constructor(page: Page) {
     super(page);
     this.siteDescription = page.locator('p.site-description');
-    this.searchInput = page.getByRole('textbox', { name: 'Search products...' });
+    this.searchInput = page.locator('input[name="s"]');
     this.searchButton = page.locator('button.header-search-button');
   }
 

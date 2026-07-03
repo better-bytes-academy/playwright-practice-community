@@ -1,11 +1,11 @@
 import { test as base } from '@playwright/test';
 import { HomePage } from '@pages/home/home.page';
-import { SearchResultPage } from '@pages/search/search-result-page';
+import { SearchResultPage as SearchResultPage2 } from '@/pages/search/search-result-page-Ngoc';
 import { ProductDetailPage } from '@pages/search/product-detail-page';
 
 type HomeFixtures = {
   homePage: HomePage;
-  searchResultPage: SearchResultPage;
+  searchResultPage: SearchResultPage2;
   productDetailPage: ProductDetailPage;
 };
 
@@ -16,7 +16,7 @@ export const test = base.extend<HomeFixtures>({
   },
 
   searchResultPage: async ({ page }, use) => {
-    const searchResultPage = new SearchResultPage(page);
+    const searchResultPage = new SearchResultPage2(page);
     await use(searchResultPage);
   },
 

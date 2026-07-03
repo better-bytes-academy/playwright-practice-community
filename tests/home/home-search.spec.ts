@@ -1,4 +1,5 @@
-import { test, expect } from '@fixtures';
+//import { test, expect } from '@fixtures';
+import {test, expect} from '@fixtures/home/home.fixture';
 
 test.describe('HOME_20260701: Search Product', () => {
     test('Check search function at Homepage', async ({ homePage, searchResultPage, productDetailPage }) => {
