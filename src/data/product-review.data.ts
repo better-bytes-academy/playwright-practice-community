@@ -1,5 +1,5 @@
 export const PRODUCT_REVIEW_DATA = {
-    productInfor: {
+    productInfo: {
         name: "ISTQB Certified Tester Finance Testing (CT-FT) Tiếng Việt",
         originalPrice: "399.000 $",
         salePrice: "279.000 $",

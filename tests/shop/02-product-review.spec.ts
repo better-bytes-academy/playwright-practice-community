@@ -8,25 +8,15 @@ test.describe('Review product function', () => {
   test('HOME_20260704 - Review sản phẩm', {tag: ["@HOME_20260704"]}, async ({ page, browser, homePage, productPage }) => {
     await test.step('Search product', async () => {
       await homePage.goto();
-      await homePage.searchProduct(PRODUCT_REVIEW_DATA.productInfor.name);
+      await homePage.searchProduct(PRODUCT_REVIEW_DATA.productInfo.name);
     });
     await test.step('Redirect to product detail & verify product information', async() => {
-      await productPage.verifyGoToProductDetail(PRODUCT_REVIEW_DATA.productInfor.name);
-      await productPage.verifyProductInformation({
-        productName: PRODUCT_REVIEW_DATA.productInfor.name,
-        originalPrice: PRODUCT_REVIEW_DATA.productInfor.originalPrice,
-        salePrice: PRODUCT_REVIEW_DATA.productInfor.salePrice,
-        description: PRODUCT_REVIEW_DATA.productInfor.description
-      });
+      await productPage.verifyGoToProductDetail(PRODUCT_REVIEW_DATA.productInfo.name);
+      await productPage.verifyProductInformation(PRODUCT_REVIEW_DATA.productInfo);
     });
     await test.step('Add a review', async() => {
       await productPage.clickReviewTab();
-      await productPage.addAReview({
-        rating: PRODUCT_REVIEW_DATA.review.ratingNumber,
-        reviewContent: PRODUCT_REVIEW_DATA.review.reviewContent,
-        reviewerName: PRODUCT_REVIEW_DATA.review.reviewerName,
-        reviewerEmail: PRODUCT_REVIEW_DATA.review.reviewerEmail
-      });
+      await productPage.addAReview(PRODUCT_REVIEW_DATA.review);
       await productPage.clickReviewSubmit();
       await productPage.verifyReviewPendingApproval(PRODUCT_REVIEW_DATA.review.reviewContent);
     });
@@ -41,8 +31,8 @@ test.describe('Review product function', () => {
         const guestHomePage = new HomePage(guestPage);
         const guestProductPage = new ProductPage(guestPage);
         await guestHomePage.goto();
-        await guestHomePage.searchProduct(PRODUCT_REVIEW_DATA.productInfor.name);
-        await guestProductPage.verifyGoToProductDetail(PRODUCT_REVIEW_DATA.productInfor.name);
+        await guestHomePage.searchProduct(PRODUCT_REVIEW_DATA.productInfo.name);
+        await guestProductPage.verifyGoToProductDetail(PRODUCT_REVIEW_DATA.productInfo.name);
         await guestProductPage.clickReviewTab();
         await guestProductPage.verifyReviewNotVisibleForOtherPage(PRODUCT_REVIEW_DATA.review.reviewContent);
       } finally {
