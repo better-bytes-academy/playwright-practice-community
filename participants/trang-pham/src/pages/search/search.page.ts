@@ -16,7 +16,7 @@ export class SearchPage {
     }
 
     countCourses = async () => {
-        return this.count = await this.page.locator('.products.columns-4 li').count();
+        return this.page.locator('.products.columns-4 li').count();
     }
 
     coursesNames = async () => {
