@@ -18,7 +18,8 @@ export class BasePage {
         this.page = page;
         this.searchFld = page.locator('input.header-search-input');
         this.categorySlt = page.locator('select.header-search-select');
-        this.searchBtn = page.locator('button.header-search-button');    }
+        this.searchBtn = page.locator('button.header-search-button');
+    }
 
     navigateMainPage = async (path: string = '') => {
         await this.page.goto(path);
