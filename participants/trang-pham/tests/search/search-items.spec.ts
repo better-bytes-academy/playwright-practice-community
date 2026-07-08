@@ -1,6 +1,6 @@
-import { SearchPage } from 'participants/trang-pham/src/pages/search/search.page';
+import { SearchPage } from '../../src/pages/search/search.page';
 import { test, expect } from '../../src/fixtures';
-import { ShopPage } from 'participants/trang-pham/src/pages/shop/shop.page';
+import { ShopPage } from '../../src/pages/shop/shop.page';
 
 const testData = {
     searchTxt : 'ISTQB'
