@@ -1,4 +1,4 @@
-import { test, expect } from '@fixtures';
+import { test, expect } from '../../src/fixtures';
 
 test.describe('Home page search function', () => {
   test('HOME_20260701 - Search product with keyword "ISTQB"', {

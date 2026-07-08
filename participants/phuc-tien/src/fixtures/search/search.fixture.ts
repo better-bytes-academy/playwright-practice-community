@@ -1,5 +1,5 @@
 import { test as base } from '@playwright/test';
-import { SearchResultPage } from '@pages/search/search-result.page';
+import { SearchResultPage } from '../../pages/search/search-result.page';
 
 type SearchFixtures = {
   searchResultPage: SearchResultPage;
