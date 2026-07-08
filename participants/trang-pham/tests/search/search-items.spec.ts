@@ -6,9 +6,8 @@ const testData = {
     searchTxt : 'ISTQB'
 }
 
-test('HOME_20260701: Search courses', async ({ basePage, searchPage, shopPage}) => {
+test('HOME_20260701: Search courses', async ({ homePage: basePage, searchPage, shopPage}) => {
     await test.step('Go to E-commerce site testing', async () => {
-        await basePage.navigateMainPage();
         await expect(basePage.siteTitle.title('E-commerce site testing')).toBeVisible();
         await expect(basePage.siteTitle.description('Website thực hành – hoctest.com')).toBeVisible();
     })
@@ -19,7 +18,9 @@ test('HOME_20260701: Search courses', async ({ basePage, searchPage, shopPage}) 
         await expect(basePage.page).toHaveURL(`?post_type=product&s=${testData.searchTxt}&product_cat=`);
 
         const numberOfCourses = await searchPage.countCourses();
-        
+
+        await expect(searchPage.result.searchResults(testData.searchTxt)).toBeVisible();
+        await expect(searchPage.result.showingAllResults(5)).toBeVisible();
         expect(numberOfCourses).toBe(5);
     })
 

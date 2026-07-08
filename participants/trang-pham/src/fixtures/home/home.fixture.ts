@@ -1,19 +1,18 @@
-import { BasePage } from '../../pages/base.page'
-import { test as base, expect } from '@playwright/test'
+import { HomePage } from '../../pages/home/home.page';
+import { test as base, expect } from '@playwright/test';
 
 type HomeFixture = {
-    basePage: BasePage;
+    homePage: HomePage;
 }
 
 export const test = base.extend <HomeFixture> (
     {
-        basePage : async ({page}, use) => {
-            const basePage = new BasePage(page);
+        homePage : async ({page}, use) => {
+        const homePage = new HomePage(page);
         
         // Setup
-        await basePage.navigateMainPage();
-        
-        await use(basePage);
+        await homePage.navigateMainPage();
+        await use(homePage);
 
         }
     }

@@ -6,7 +6,7 @@ export class SearchPage {
 
     get result() {
         return {
-            searchResults: (searchKey: string) => this.page.getByText(`Search results: "${searchKey}"`),
+            searchResults: (searchKey: string) => this.page.getByRole('heading', {name: `Search results: “${searchKey}”`}),
             showingAllResults: (number: number) => this.page.getByText(`Showing all ${number} results`),
         }
     }
