@@ -10,20 +10,24 @@ test.describe('Review product function', () => {
       await homePage.goto();
       await homePage.searchProduct(PRODUCT_REVIEW_DATA.productInfo.name);
     });
+
     await test.step('Redirect to product detail & verify product information', async() => {
-      await productPage.verifyGoToProductDetail(PRODUCT_REVIEW_DATA.productInfo.name);
+      await expect(page).toHaveTitle('ISTQB Certified Tester Finance Testing (CT-FT) Tiếng Việt – E-commerce site testing'),
       await productPage.verifyProductInformation(PRODUCT_REVIEW_DATA.productInfo);
     });
+
     await test.step('Add a review', async() => {
       await productPage.clickReviewTab();
       await productPage.addAReview(PRODUCT_REVIEW_DATA.review);
       await productPage.clickReviewSubmit();
       await productPage.verifyReviewPendingApproval(PRODUCT_REVIEW_DATA.review.reviewContent);
     });
+
     await test.step('Verify review has awaiting approval after refresh paege', async() => {
       await page.reload({waitUntil: 'domcontentloaded'});
       await productPage.verifyReviewPendingApproval(PRODUCT_REVIEW_DATA.review.reviewContent);
     });
+
     await test.step('Verify review is hidden in another browser', async() => {
       const guestContext = await browser.newContext();
       try {
@@ -32,7 +36,7 @@ test.describe('Review product function', () => {
         const guestProductPage = new ProductPage(guestPage);
         await guestHomePage.goto();
         await guestHomePage.searchProduct(PRODUCT_REVIEW_DATA.productInfo.name);
-        await guestProductPage.verifyGoToProductDetail(PRODUCT_REVIEW_DATA.productInfo.name);
+        await expect(guestPage).toHaveTitle('ISTQB Certified Tester Finance Testing (CT-FT) Tiếng Việt – E-commerce site testing');
         await guestProductPage.clickReviewTab();
         await guestProductPage.verifyReviewNotVisibleForOtherPage(PRODUCT_REVIEW_DATA.review.reviewContent);
       } finally {

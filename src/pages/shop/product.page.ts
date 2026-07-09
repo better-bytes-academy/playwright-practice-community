@@ -1,6 +1,20 @@
 import { Locator, Page, expect } from '@playwright/test';
 import { BasePage } from '@pages/base.page';
 
+export type ProductData = {
+  name: string;
+  originalPrice: string;
+  salePrice: string;
+  description: string;
+};
+
+export type ReviewData = {
+  ratingNumber: number;
+  reviewContent: string;
+  reviewerName: string;
+  reviewerEmail: string;
+};
+
 export class ProductPage extends BasePage {
     constructor(page: Page) {
     super(page);
@@ -9,16 +23,16 @@ export class ProductPage extends BasePage {
   // ============ LOCATORS ============
   readonly product = {
     summary: this.page.locator('.summary.entry-summary'),
-    name: this.page.locator('h1.product_title.entry-title'),
-    originalPrice: this.page.locator('.summary.entry-summary del .woocommerce-Price-amount').first(),
-    salePrice: this.page.locator('.summary.entry-summary ins .woocommerce-Price-amount').first(),
+    name: this.page.getByRole('heading', { level: 1 }),
+    originalPrice: this.page.locator('.summary.entry-summary del .woocommerce-Price-amount'),
+    salePrice: this.page.locator('.summary.entry-summary ins .woocommerce-Price-amount'),
     description: this.page.locator('.summary.entry-summary .woocommerce-product-details__short-description p')
   }
   readonly review = {
-    reviewTab: this.page.locator('a[href="#tab-reviews"]'),
-    reviewContent: this.page.locator('#comment').first(),
-    reviewerNameInput: this.page.locator('#author'),
-    reviewerEmailInput: this.page.locator('#email'),
+    reviewTab: this.page.getByRole('tab', {name: /Review/i}),
+    reviewContent: this.page.getByLabel('Your review'),
+    reviewerNameInput: this.page.getByRole('textbox', { name: /Name/i }),
+    reviewerEmailInput: this.page.getByRole('textbox', { name: /Email/i}),
     submitReviewButton: this.page.getByRole('button', {name: 'submit'}),
     reviewLists: this.page.locator('#comments .commentlist')
   }
@@ -28,11 +42,8 @@ export class ProductPage extends BasePage {
   }
 
   // ============ ACTION METHODS ============
-  async verifyGoToProductDetail(productName: string){
-    await expect(this.page).toHaveTitle(`${productName} – E-commerce site testing`);
-  }
 
-  async verifyProductInformation(productInfo: { name: string; originalPrice: string; salePrice: string; description: string}){
+  async verifyProductInformation(productInfo: ProductData){
     await expect(this.product.name).toHaveText(productInfo.name)
     await expect(this.product.originalPrice).toContainText(productInfo.originalPrice)
     await expect(this.product.salePrice).toContainText(productInfo.salePrice)
@@ -43,7 +54,7 @@ export class ProductPage extends BasePage {
     await this.review.reviewTab.click()
   }
 
-  async addAReview(review: { ratingNumber: number; reviewContent: string; reviewerName: string, reviewerEmail: string}){
+  async addAReview(review: ReviewData){
     await this.rating(review.ratingNumber).click()
     await this.review.reviewContent.fill(review.reviewContent)
     await this.review.reviewerNameInput.fill(review.reviewerName)
