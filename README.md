@@ -22,21 +22,17 @@ Dự án này được tạo ra nhằm giúp các thành viên trong cộng đ�
 Dự án được tổ chức theo cấu trúc chuẩn như sau:
 
 ```text
-├── src/                  # Mã nguồn dùng chung của toàn dự án
-│   ├── components/       # Các component dùng chung trên giao diện
-│   ├── config/           # Cấu hình hệ thống, môi trường
-│   ├── data/             # Dữ liệu phục vụ kiểm thử (test data)
-│   ├── fixtures/         # Định nghĩa custom fixtures dùng chung
-│   └── pages/            # Các Page Object Model (POM) dùng chung
-├── tests/                # Chứa các kịch bản kiểm thử dùng chung
-├── participants/         # Chứa mã nguồn của từng học viên tham gia (ví dụ: participants/alex/)
-│   ├── <ten_hoc_vien>/
-│   │   ├── src/          # Page Objects, Fixtures riêng của học viên
-│   │   └── tests/        # Test Specs riêng của học viên
-├── template/             # Thư mục mẫu chứa cấu trúc src/ và tests/ để copy khi tạo mới học viên
-│   ├── src/
-│   └── tests/
-├── docs/                 # Tài liệu hướng dẫn, ghi chú của dự án
+├── participants/             # Chứa mã nguồn của từng học viên tham gia
+│   ├── template/             # Thư mục mẫu (nguồn gốc để tạo workspace mới)
+│   │   ├── src/              # Page Objects & Fixtures mẫu
+│   │   └── tests/            # Test Specs mẫu
+│   └── <ten_hoc_vien>/       # Workspace riêng của từng học viên (ví dụ: participants/alex/)
+│       ├── src/              # Page Objects, Fixtures riêng của học viên
+│       │   ├── fixtures/
+│       │   └── pages/
+│       ├── tests/            # Test Specs riêng của học viên
+│       └── tsconfig.json     # Cấu hình TypeScript riêng (path alias @<ten_hoc_vien>)
+├── scripts/              # Scripts tiện ích của dự án
 ├── playwright.config.ts  # Cấu hình Playwright
 └── tsconfig.json         # Cấu hình TypeScript & Path Aliases
 ```
@@ -58,11 +54,29 @@ Dự án được tổ chức theo cấu trúc chuẩn như sau:
    npm install
    ```
 4. **Tạo Branch mới**: Hãy tạo một nhánh (branch) mới để bắt đầu viết test code (xem chi tiết quy tắc đặt tên ở phần [Git Convention](#-git-convention) dưới đây).
-5. **Khởi tạo thư mục làm việc cá nhân**:
-   - Nhân bản (copy) thư mục `template` ở ngoài thư mục gốc vào trong thư mục `participants/` và đổi tên thành tên của bạn (viết thường, viết liền không dấu, ví dụ: `alex`).
-   - Cấu trúc thư mục của bạn sẽ là: `participants/alex/src/` và `participants/alex/tests/`.
-   - Viết các file Page Objects của bạn trong `participants/alex/src/pages/`, fixtures trong `participants/alex/src/fixtures/`, và tests trong `participants/alex/tests/`.
-   - Bạn có thể sử dụng alias `@<ten_cua_ban>` để import từ thư mục của mình. Ví dụ: `import { LoginPage } from '@alex/src/pages/login.page';`.
+5. **Khởi tạo thư mục làm việc cá nhân** bằng lệnh sau:
+   ```bash
+   npm run participate
+   ```
+   Script sẽ tự động:
+   - Hỏi **GitHub username** của bạn.
+   - Tạo thư mục `participants/<username>/` từ template có sẵn.
+   - Cập nhật tất cả các import alias `@template/` → `@<username>/` trong toàn bộ file.
+   - Thêm path alias `@<username>/*` vào `tsconfig.json` gốc.
+
+   Sau khi script chạy xong, cấu trúc thư mục của bạn sẽ là:
+   ```text
+   participants/<username>/
+   ├── src/
+   │   ├── fixtures/
+   │   └── pages/
+   ├── tests/
+   └── tsconfig.json
+   ```
+   Bạn có thể sử dụng alias `@<username>` để import từ thư mục của mình. Ví dụ:
+   ```typescript
+   import { HomePage } from '@alex/src/pages/home/home.page';
+   ```
 6. **Viết test & kiểm tra lại**: Chạy test locally để đảm bảo code hoạt động ổn định.
    - Để chạy riêng các test của bạn:
      ```bash
