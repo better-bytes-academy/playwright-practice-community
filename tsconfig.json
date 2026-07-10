@@ -9,9 +9,19 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@template/*": ["participants/template/*"]
+      "@/*": [
+        "src/*"
+      ],
+      "@template/*": [
+        "participants/template/*"
+      ],
+      "@phuctien1909/*": [
+        "participants/phuctien1909/*"
+      ]
     }
   },
-  "include": ["src/**/*", "tests/**/*", "playwright.config.ts", "participants/**/*", "participants/template/**/*"]
+  "include": [
+    "playwright.config.ts",
+    "participants/**/*",
+  ]
 }

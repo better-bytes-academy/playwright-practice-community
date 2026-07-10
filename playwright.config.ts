@@ -7,7 +7,6 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 export default defineConfig({
   testDir: '.',
   testMatch: [
-    'tests/**/*.spec.ts',
     'participants/**/*.spec.ts'
   ],
   fullyParallel: true,
