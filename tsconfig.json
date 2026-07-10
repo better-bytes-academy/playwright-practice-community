@@ -9,14 +9,19 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@config/*": ["src/config/*"],
-      "@data/*": ["src/data/*"],
-      "@fixtures": ["src/fixtures/index.ts"],
-      "@fixtures/*": ["src/fixtures/*"],
-      "@pages/*": ["src/pages/*"]
+      "@/*": [
+        "src/*"
+      ],
+      "@template/*": [
+        "participants/template/*"
+      ],
+      "@phuctien1909/*": [
+        "participants/phuctien1909/*"
+      ]
     }
   },
-  "include": ["src/**/*", "tests/**/*", "playwright.config.ts"]
+  "include": [
+    "playwright.config.ts",
+    "participants/**/*",
+  ]
 }
