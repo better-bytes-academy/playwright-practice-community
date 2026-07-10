@@ -1,4 +1,4 @@
-import { test, expect } from '@fixtures';
+import { test, expect } from '@template/src/fixtures';
 
 test.describe('Sample suite verification', () => {
   test('Home page should display correct title and description', {
