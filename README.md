@@ -1,4 +1,4 @@
-# 🚀 Dự án Thực hành Playwright E-Commerce (Cộng đồng)
+# 🚀 Dự án Thực hành Playwright E-Commerce (Cộng đồng) - hello
 
 Chào mừng các bạn đến với sân chơi thực hành kiểm thử tự động (Automation Testing) sử dụng **Playwright**!
 
