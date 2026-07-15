@@ -11,4 +11,3 @@ test.describe('Sample suite verification', () => {
     });
   });
 });
-
