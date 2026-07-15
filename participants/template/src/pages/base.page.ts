@@ -11,7 +11,6 @@ export class BasePage {
    * Navigates to a specific path relative to the baseURL or an absolute URL.
    */
   async navigate(path: string = '/'): Promise<void> {
-
     await this.page.goto(path);
   }
 }

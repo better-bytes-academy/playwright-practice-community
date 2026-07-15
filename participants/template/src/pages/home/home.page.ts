@@ -1,5 +1,4 @@
 import { Locator, Page } from '@playwright/test';
-
 import { BasePage } from '@template/src/pages/base.page';
 
 export class HomePage extends BasePage {
