@@ -22,26 +22,17 @@ Dự án này được tạo ra nhằm giúp các thành viên trong cộng đ�
 Dự án được tổ chức theo cấu trúc chuẩn như sau:
 
 ```text
-├── src/
-│   ├── components/       # Các component dùng chung trên giao diện
-│   ├── config/           # Cấu hình hệ thống, môi trường
-│   ├── data/             # Dữ liệu phục vụ kiểm thử (test data)
-│   ├── fixtures/         # Định nghĩa custom fixtures cho Playwright
-│   │   ├── blog/
-│   │   ├── home/
-│   │   ├── search/
-│   │   └── shop/
-│   └── pages/            # Các Page Object Model (POM) đại diện cho các trang
-│       ├── blog/
-│       ├── home/
-│       ├── search/
-│       └── shop/
-├── tests/                # Chứa các kịch bản kiểm thử (Test Specs)
-│   ├── blog/
-│   ├── home/
-│   ├── search/
-│   └── shop/
-├── docs/                 # Tài liệu hướng dẫn, ghi chú của dự án
+├── participants/             # Chứa mã nguồn của từng học viên tham gia
+│   ├── template/             # Thư mục mẫu (nguồn gốc để tạo workspace mới)
+│   │   ├── src/              # Page Objects & Fixtures mẫu
+│   │   └── tests/            # Test Specs mẫu
+│   └── <ten_hoc_vien>/       # Workspace riêng của từng học viên (ví dụ: participants/alex/)
+│       ├── src/              # Page Objects, Fixtures riêng của học viên
+│       │   ├── fixtures/
+│       │   └── pages/
+│       ├── tests/            # Test Specs riêng của học viên
+│       └── tsconfig.json     # Cấu hình TypeScript riêng (path alias @<ten_hoc_vien>)
+├── scripts/              # Scripts tiện ích của dự án
 ├── playwright.config.ts  # Cấu hình Playwright
 └── tsconfig.json         # Cấu hình TypeScript & Path Aliases
 ```
@@ -63,11 +54,43 @@ Dự án được tổ chức theo cấu trúc chuẩn như sau:
    npm install
    ```
 4. **Tạo Branch mới**: Hãy tạo một nhánh (branch) mới để bắt đầu viết test code (xem chi tiết quy tắc đặt tên ở phần [Git Convention](#-git-convention) dưới đây).
-5. **Viết test & kiểm tra lại**: Chạy test locally để đảm bảo code hoạt động ổn định.
-6. **Tạo Pull Request (PR)**: Đẩy code lên repo cá nhân của bạn và tạo PR gửi về repo gốc.
+5. **Khởi tạo thư mục làm việc cá nhân** bằng lệnh sau:
+   ```bash
+   npm run participate
+   ```
+   Script sẽ tự động:
+   - Hỏi **GitHub username** của bạn.
+   - Tạo thư mục `participants/<username>/` từ template có sẵn.
+   - Cập nhật tất cả các import alias `@template/` → `@<username>/` trong toàn bộ file.
+   - Thêm path alias `@<username>/*` vào `tsconfig.json` gốc.
+
+   Sau khi script chạy xong, cấu trúc thư mục của bạn sẽ là:
+   ```text
+   participants/<username>/
+   ├── src/
+   │   ├── fixtures/
+   │   └── pages/
+   ├── tests/
+   └── tsconfig.json
+   ```
+   Bạn có thể sử dụng alias `@<username>` để import từ thư mục của mình. Ví dụ:
+   ```typescript
+   import { HomePage } from '@alex/src/pages/home/home.page';
+   ```
+6. **Viết test & kiểm tra lại**: Chạy test locally để đảm bảo code hoạt động ổn định.
+   - Để chạy riêng các test của bạn:
+     ```bash
+     npx playwright test participants/alex/tests
+     ```
+   - Hoặc chạy toàn bộ test trong dự án:
+     ```bash
+     npx playwright test
+     ```
+7. **Tạo Pull Request (PR)**: Đẩy code lên repo cá nhân của bạn và tạo PR gửi về repo gốc.
 
 > [!IMPORTANT]
 > **Lưu ý quan trọng khi contribute:**
+> - **Chỉ tạo/sửa đổi** code trong thư mục cá nhân của bạn ở `participants/<your_name>/`. Tránh sửa đổi các file dùng chung trong `src/` hoặc `tests/` trừ khi có hướng dẫn cụ thể.
 > - **Không tự ý thay đổi** cấu hình trong file `playwright.config.ts`.
 > - **Không cài đặt thêm** bất kỳ thư viện/package bên ngoài nào khác.
 

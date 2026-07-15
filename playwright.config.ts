@@ -7,7 +7,7 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 export default defineConfig({
   testDir: '.',
   testMatch: [
-    '**/*.spec.ts',
+    'participants/**/*.spec.ts'
   ],
   fullyParallel: true,
   forbidOnly: !!process.env.CI,

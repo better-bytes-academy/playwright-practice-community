@@ -2,7 +2,9 @@
   "name": "001-community-project",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "participate": "node scripts/participate.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

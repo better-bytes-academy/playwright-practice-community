@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@trangpham/*": ["./*"]
+    }
+  },
+  "include": ["src/**/*", "tests/**/*"]
+}
